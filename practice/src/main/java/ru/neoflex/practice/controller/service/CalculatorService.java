@@ -1,7 +1,7 @@
-package ru.neoflex.practice.demo.service;
+package ru.neoflex.practice.controller.service;
 
 import ru.neoflex.practice.demo.model.CalculationRecord;
-import ru.neoflex.practice.demo.repository.CalculationRepository;
+import ru.neoflex.practice.controller.repository.CalculationRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

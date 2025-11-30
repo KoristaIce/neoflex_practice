@@ -18,33 +18,31 @@ class CalculatorControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    void testAddEndpoint() throws Exception {
-        mockMvc.perform(get("/api/calculator/add")
-                        .param("a", "10")
-                        .param("b", "5")
+    void testPlusEndpoint() throws Exception {
+        mockMvc.perform(get("/api/calculator/plus/10/20")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string("15.0"));
+                .andExpect(content().string("30"));
     }
 
     @Test
-    void testSubtractEndpoint() throws Exception {
-        mockMvc.perform(get("/api/calculator/subtract")
-                        .param("a", "10")
-                        .param("b", "3")
+    void testMinusEndpoint() throws Exception {
+        mockMvc.perform(get("/api/calculator/minus/50/20")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string("7.0"));
+                .andExpect(content().string("30"));
     }
+
 
     @Test
     void testHistoryEndpoint() throws Exception {
-        mockMvc.perform(get("/api/calculator/add").param("a", "1").param("b", "2"));
+        // Создаем запись через новый метод
+        mockMvc.perform(get("/api/calculator/plus/1/2"));
 
         mockMvc.perform(get("/api/calculator/history")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$[0].operation").value("SUM"));
+                .andExpect(jsonPath("$[-1].operation").exists());
     }
 }

@@ -1,7 +1,7 @@
-package ru.neoflex.practice.demo.controller;
+package ru.neoflex.practice.controller.controller;
 
 import ru.neoflex.practice.demo.model.CalculationRecord;
-import ru.neoflex.practice.demo.service.CalculatorService;
+import ru.neoflex.practice.controller.service.CalculatorService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,14 +16,14 @@ public class CalculatorController {
         this.service = service;
     }
 
-    @GetMapping("/add")
-    public double add(@RequestParam double a, @RequestParam double b) {
-        return service.sum(a, b);
+    @GetMapping("/plus/{a}/{b}")
+    public Integer plus(@PathVariable("a") Integer a, @PathVariable("b") Integer b) {
+        return (int) service.sum(a, b);
     }
 
-    @GetMapping("/subtract")
-    public double subtract(@RequestParam double a, @RequestParam double b) {
-        return service.subtract(a, b);
+    @GetMapping("/minus/{a}/{b}")
+    public Integer minus(@PathVariable("a") Integer a, @PathVariable("b") Integer b) {
+        return (int) service.subtract(a, b);
     }
 
     @GetMapping("/history")
